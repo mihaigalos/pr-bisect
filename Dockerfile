@@ -5,8 +5,8 @@ RUN apt update &&\
     git \
     tig \
     vim
-WORKDIR /src
 
+WORKDIR /src
 COPY find-broken-commit-in-pr find-broken-pr pr-bisect /usr/bin/
 
 ENTRYPOINT [ "pr-bisect" ]

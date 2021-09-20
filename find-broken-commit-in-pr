@@ -7,6 +7,7 @@ echo "\n"
 commit=$(git rev-parse $1)
 shift
 git_run_command_and_args=$@
+
 if test -z "$(git show --min-parents=2 --max-parents=2 ${commit})"; then
     echo "Following commit broke functionality: $commit"
 else
@@ -18,3 +19,4 @@ else
     git bisect good "${good_parent}" 
     git bisect run "${git_run_command_and_args}"
 fi
+
