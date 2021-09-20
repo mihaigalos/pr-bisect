@@ -3,9 +3,9 @@
 bad_commit=$1
 good_commit=$2
 shift 2
-
 git_bisect_command=$@
 
+PATH=$pwd:$PATH
 git bisect reset
-./find-broken-pr "${bad_commit}" "${good_commit}" "${git_bisect_command}"
-./find-broken-commit-in-pr "HEAD" "${git_bisect_command}"
+find-broken-pr "${bad_commit}" "${good_commit}" "${git_bisect_command}"
+find-broken-commit-in-pr "HEAD" "${git_bisect_command}"
