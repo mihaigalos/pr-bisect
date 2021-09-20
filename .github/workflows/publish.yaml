@@ -31,6 +31,6 @@ jobs:
         just --version
         just test
 
-    - name: Build and Test
+    - name: Push
       run: |
         just push
