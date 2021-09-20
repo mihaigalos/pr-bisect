@@ -29,7 +29,6 @@ jobs:
         echo $PATH
         ls -all /home/runner/.local/bin/
         just --version
-        just build_docker
         just test
 
     - name: Build and Test
