@@ -23,7 +23,7 @@ test: build_docker
     git clone https://github.com/mihaigalos/pr-bisect-test-repo.git && cd pr-bisect-test-repo
     docker run -t --rm -v $(pwd):/src -v /tmp:/tmp {{docker_image}} ab0337e87b915218542d6226f0fb809fe25111aa 33ccecac94998f271da271edc4806055d0025b5d ./run.sh | tee /tmp/pr-bisect.log
     grep "is the first bad commit" /tmp/pr-bisect.log || err "ERROR: bad commit cannot be found."
-    popd
+    popd >/dev/null
 
 push: test
     docker push {{docker_image}}
