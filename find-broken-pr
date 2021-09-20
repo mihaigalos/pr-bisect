@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+echo "\n"
+echo "\e[1;36m--------------------- Bisecting to find breaking merge commits / PRs ---------------------\e[0m"
+echo "\n"
+
+bad_commit=$1
+good_commit=$2
+shift 2
+git_run_command_and_args=$@
+
+git bisect start "$bad_commit" "$good_commit"
+prCommits=$(for commit in $(git rev-list "$good_commit".."$bad_commit" --merges --first-parent); do
+  git rev-list "$commit"^2 --not "$commit"^
+done)
+
+echo "$prCommits" | xargs git bisect skip
+
+git bisect run "${git_run_command_and_args}"
+
+echo "Breaking merge commit / PR merge is:\n"
+git log -1

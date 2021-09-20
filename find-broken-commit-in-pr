@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+echo "\n"
+echo "\e[1;36m--------------------- Bisecting inside of found merge commit / PR merge ---------------------\e[0m"
+echo "\n"
+
+commit=$(git rev-parse $1)
+shift
+git_run_command_and_args=$@
+if test -z "$(git show --min-parents=2 --max-parents=2 ${commit})"; then
+    echo "Following commit broke functionality: $commit"
+else
+    git bisect reset
+    good_parent=$(git rev-list --parents -n 1 $commit | cut -d' ' -f 2)
+    bad_parent=$(git rev-list --parents -n 1 $commit | cut -d' ' -f 3)
+    git bisect start "${bad_parent} ${good_parent}" 
+    git bisect run "${git_run_command_and_args}"
+fi
