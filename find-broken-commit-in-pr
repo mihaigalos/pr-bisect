@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-echo "\n"
-echo "\e[1;36m--------------------- Bisecting inside of found merge commit / PR merge ---------------------\e[0m"
-echo "\n"
+echo
+echo -e "\e[96m--------------------- Bisecting inside of found merge commit / PR merge ---------------------\e[39m"
+echo
 
 commit=$(git rev-parse $1)
 shift
