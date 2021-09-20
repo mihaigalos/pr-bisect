@@ -1,10 +1,7 @@
-FROM ubuntu:21.10 as base
+FROM debian:buster-slim as base
 RUN apt update &&\
     DEBIAN_FRONTEND=noninteractive apt install --yes --fix-broken \
-    bash \
-    git \
-    tig \
-    vim
+    git
 
 WORKDIR /src
 COPY find-broken-commit-in-pr find-broken-pr pr-bisect /usr/bin/
