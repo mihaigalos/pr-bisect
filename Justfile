@@ -12,7 +12,8 @@ build_docker:
     docker build -t {{docker_image}} .
 
 test: build_docker
-    #! /bin/bash
+    #!/bin/bash
+    echo $SHELL
     function err() {
         echo -e "\e[1;31m${@}\e[0m" >&2
         exit 1

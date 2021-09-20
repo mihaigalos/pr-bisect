@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-echo "\n"
-echo "\e[1;36m--------------------- Bisecting to find breaking merge commits / PRs ---------------------\e[0m"
-echo "\n"
-
+echo
+echo -e "\e[96m--------------------- Bisecting to find breaking merge commits / PRs ---------------------\e[39m"
+echo
+echo $SHELL
 bad_commit=$1
 good_commit=$2
 shift 2

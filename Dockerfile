@@ -1,9 +1,12 @@
-FROM debian:buster-slim as base
-RUN apt update &&\
-    DEBIAN_FRONTEND=noninteractive apt install --yes --fix-broken \
-    git
-
+FROM alpine/git as base
+RUN apk update &&\
+    apk add \
+        bash \
+        git &&\
+    sed -i -e "s|/bin/ash|/bin/bash|g" /etc/passwd
 WORKDIR /src
+ENV SHELL=/usr/bin/bash
+#ENV TERM=dumb
 COPY find-broken-commit-in-pr find-broken-pr pr-bisect /usr/bin/
 
 ENTRYPOINT [ "pr-bisect" ]
