@@ -13,6 +13,8 @@ else
     git bisect reset
     good_parent=$(git rev-list --parents -n 1 $commit | cut -d' ' -f 2)
     bad_parent=$(git rev-list --parents -n 1 $commit | cut -d' ' -f 3)
-    git bisect start "${bad_parent} ${good_parent}" 
+    git bisect start
+    git bisect bad "${bad_parent}"
+    git bisect good "${good_parent}" 
     git bisect run "${git_run_command_and_args}"
 fi

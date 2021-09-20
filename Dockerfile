@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 as base
+FROM ubuntu:21.10 as base
 RUN apt update &&\
     DEBIAN_FRONTEND=noninteractive apt install --yes --fix-broken \
     bash \
@@ -9,4 +9,4 @@ WORKDIR /src
 
 COPY find-broken-commit-in-pr find-broken-pr pr-bisect /usr/bin/
 
-#CMD ["/pr-bisect"]
+ENTRYPOINT [ "pr-bisect" ]

@@ -9,7 +9,9 @@ good_commit=$2
 shift 2
 git_run_command_and_args=$@
 
-git bisect start "$bad_commit" "$good_commit"
+git bisect start
+git bisect bad "${bad_commit}"
+git bisect good "${good_commit}" 
 prCommits=$(for commit in $(git rev-list "$good_commit".."$bad_commit" --merges --first-parent); do
   git rev-list "$commit"^2 --not "$commit"^
 done)
