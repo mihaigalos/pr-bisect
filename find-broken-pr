@@ -21,3 +21,4 @@ echo "$prCommits" | xargs git bisect skip
 git bisect run "${git_run_command_and_args}"
 
 [ $? -eq 2 ] && echo "Breaking merge commit / PR merge is:\n" && git log -1
+
