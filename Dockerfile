@@ -1,8 +1,7 @@
 FROM alpine/git as base
 RUN apk update &&\
     apk add \
-        bash \
-        git &&\
+        bash &&\
     sed -i -e "s|/bin/ash|/bin/bash|g" /etc/passwd
 
 WORKDIR /src
