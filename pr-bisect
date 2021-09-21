@@ -8,7 +8,7 @@ EOT
     exit 0
 }
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -lt 3 ]; then
    usage
 fi
 
