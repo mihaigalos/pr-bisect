@@ -9,7 +9,7 @@ shift
 git_run_command_and_args=$@
 
 if test -z "$(git show --min-parents=2 --max-parents=2 ${commit})"; then
-    echo "Following commit broke functionality: $commit"
+    echo "${commit} is the first bad commit"
 else
     git bisect reset
     good_parent=$(git rev-list --parents -n 1 $commit | cut -d' ' -f 2)
