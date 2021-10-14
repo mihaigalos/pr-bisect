@@ -5,7 +5,7 @@ Bisection of PRs / merge commits using `git bisect`. If a PR merge was identifie
 ### Usage
 
 ```bash
-docker run -t --rm -v $(pwd):/src -v /tmp:/tmp ghcr.io/mihaigalos/docker/pr-bisect:0.0.1 BAD_COMMIT GOOD_COMMIT RUNNER
+docker run -t --rm -v $(pwd):/src -v /tmp:/tmp ghcr.io/mihaigalos/docker/pr-bisect:latest BAD_COMMIT GOOD_COMMIT RUNNER
 ```
 
 `RUNNER` is the logic delegated to git bisect: i.e. from your tester returning 0 for success and != 0 for failure.
