@@ -2,9 +2,9 @@ default:
   @just --list
 
 tool := "pr-bisect"
-docker_container_registry := "ghcr.io"
+docker_container_registry := "docker.pkg.github.com"
 docker_user_repo := "mihaigalos/docker"
-docker_image_version := "0.0.1"
+docker_image_version := "latest"
 docker_image := docker_container_registry + "/" + docker_user_repo + "/" + tool + ":" + docker_image_version
 
 build:
