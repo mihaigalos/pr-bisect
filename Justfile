@@ -11,7 +11,11 @@ build:
     docker build -t {{docker_image}} .
 
 pull:
-    docker pull {{docker_image}}
+    #!/bin/bash
+    set -x
+    docker_container_registry_pull="ghcr.io"
+    docker_image="$docker_container_registry_pull/{{docker_user_repo}}/{{tool}}:{{docker_image_version}}"
+    docker pull $docker_image
 
 push: test
     docker push {{docker_image}}
