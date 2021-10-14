@@ -14,7 +14,7 @@ pull:
     docker pull {{docker_image}}
 
 push: test
-    docker push docker.pkg.github.com/{{docker_user_repo}}/{{tool}}
+    docker push {{docker_image}}
 
 test: build
     #!/bin/bash
