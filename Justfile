@@ -7,13 +7,16 @@ docker_user_repo := "mihaigalos/docker"
 docker_image_version := "0.0.1"
 docker_image := docker_container_registry + "/" + docker_user_repo + "/" + tool + ":" + docker_image_version
 
+build:
+    docker build -t {{docker_image}} .
+
 pull:
     docker pull {{docker_image}}
 
-build_docker:
-    docker build -t {{docker_image}} .
+push: test
+    docker push {{docker_image}}
 
-test: build_docker
+test: build
     #!/bin/bash
     set -x
     echo $SHELL
@@ -29,5 +32,3 @@ test: build_docker
     grep "is the first bad commit" /tmp/pr-bisect.log || err "ERROR: bad commit cannot be found."
     popd >/dev/null
 
-push: test
-    docker push {{docker_image}}
