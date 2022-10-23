@@ -24,7 +24,3 @@ jobs:
       run: |
         just --version
         just test
-
-    - name: Push
-      run: |
-        just push
