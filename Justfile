@@ -8,19 +8,19 @@ docker_image_version := "latest"
 docker_image := docker_container_registry + "/" + docker_user_repo + "/" + tool + ":" + docker_image_version
 
 build:
-    docker build -t {{docker_image}} .
+    sudo docker build -t {{docker_image}} .
 
 pull:
     #!/bin/bash
     set -x
     docker_container_registry_pull="ghcr.io"
     docker_image="$docker_container_registry_pull/{{docker_user_repo}}/{{tool}}:{{docker_image_version}}"
-    docker pull $docker_image
+    sudo docker pull $docker_image
 
 push: test
     docker push {{docker_image}}
 
-test: build
+test:
     #!/bin/bash
     echo $SHELL
     function err() {
@@ -32,7 +32,7 @@ test: build
     pwd
     git clone https://github.com/mihaigalos/pr-bisect-test-repo.git && cd pr-bisect-test-repo
     [ -t 1 ] && DOCKER_TTY="-i" || DOCKER_TTY=""
-    docker run $DOCKER_TTY -t --rm -v $(pwd):/src -v /tmp:/tmp {{docker_image}} ab0337e87b915218542d6226f0fb809fe25111aa 33ccecac94998f271da271edc4806055d0025b5d ./run.sh | tee /tmp/pr-bisect.log
+    sudo docker run $DOCKER_TTY -t --rm -v $(pwd):/src -v /tmp:/tmp {{docker_image}} ab0337e87b915218542d6226f0fb809fe25111aa 33ccecac94998f271da271edc4806055d0025b5d ./run.sh | tee /tmp/pr-bisect.log
     grep "is the first bad commit" /tmp/pr-bisect.log || err "ERROR: bad commit cannot be found."
     popd >/dev/null
 
